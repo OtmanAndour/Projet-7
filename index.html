@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>Titre</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+                       * element that contains the map. */
+        #map {
+            height: 90%;
+            width: 70%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 90%;
+            width: 70%;
+            margin: auto;
+            padding: 1;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <form id='form'><input id="test" , type='text'></form>
+    <!--Form asking the user to fill his research-->
+    <div id='content'></div>
+    <div id='map'></div>
+    <div id='page'></div>
+    <script>
+        $('#form').submit(function (e) {
+            e.preventDefault()
+            var mavariable = $('#test').val()
+            $.get('test?name=' + mavariable, function (result) {
+                result = JSON.parse(result)
+                console.log(result)
+                $('#content').html(result.un)
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: result.latitude, lng: result.longitude },
+                    zoom: 15
+                });
+                marker = new google.maps.Marker({
+                    position: { lat: result.latitude, lng: result.longitude },
+                    map: map
+                });
+                for (let page in result.page.query.pages) {
+                    $("#page").html(result.page.query.pages[page].extract);
+                    break
+                }
+
+            })
+
+        }) 
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwPpl0K88EF2aziV-1flLjO-dePphxds" async
+        defer></script>
+    <!--Function that sends user to another page after entering his research-->
+</body>
