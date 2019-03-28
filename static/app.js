@@ -1,6 +1,7 @@
 $('#form').submit(function (e) {
     e.preventDefault()
     var mavariable = $('#input').val()
+    console.log(mavariable)
     $.get('test?name=' + mavariable, function (result) {
         result = JSON.parse(result)
         console.log(result)
