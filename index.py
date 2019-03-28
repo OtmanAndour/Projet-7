@@ -13,7 +13,7 @@ wiki_url = "https://fr.wikipedia.org/w/api.php"
 
 @app.route('/')  #Main route for the html webpage
 def helloIndex():
-    with open('index.html', 'r') as f:
+    with open('templates/index.html', 'r') as f:
         return f.read()
 
 @app.route('/test')  #Route for another webpage
