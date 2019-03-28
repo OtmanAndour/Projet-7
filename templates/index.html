@@ -5,9 +5,7 @@
     <title>GrandPy Bot</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <!-- Doesn't work for some reason...
-    <link href="style.css" rel="stylesheet" type="text/css">
-    -->
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
 
 <body>
@@ -21,99 +19,7 @@
         <div id='map'></div>
         <div id='page'></div>
     </div>
-    <script>
-        $('#form').submit(function (e) {
-            e.preventDefault()
-            var mavariable = $('#input').val()
-            $.get('test?name=' + mavariable, function (result) {
-                result = JSON.parse(result)
-                console.log(result)
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: result.latitude, lng: result.longitude },
-                    zoom: 15
-                });
-                marker = new google.maps.Marker({
-                    position: { lat: result.latitude, lng: result.longitude },
-                    map: map
-                });
-                for (let page in result.page.query.pages) {
-                    $("#page").html(result.page.query.pages[page].extract);
-                    break
-                }
-
-            })
-
-        }) 
-    </script>
-
-    <style>
-        h1 {
-            text-align: center;
-            font-size: 30px;
-        }
-
-        h3 {
-            text-align: center;
-            font-size: 22px;
-        }
-
-        .content {
-            display: flex;
-            border: 3px grey groove;
-            left: 25%;
-            width: 100%;
-            height: 80%;
-            top: 22%;
-            margin: auto;
-            flex-direction: column;
-        }
-
-        #page {
-            display: flex;
-            background-color: #ccc;
-            height: 85%;
-            flex-direction: column;
-            overflow: auto;
-        }
-
-         /* Always set the map height explicitly to define the size of the div
-                       * element that contains the map. */
-
-        #map {
-            display: flex;
-            background-color: #ccc;
-            height: 90%;
-            width: 100%;
-            flex-direction: column;
-            overflow: auto;
-        }
-
-
-        #form {
-            background-color: #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 15%;
-        }
-
-        #input {
-            width: 75%
-        }
-
-        html {
-            background-image: url("images/background.jpg");
-        }
-
-        /* Optional: Makes the sample page fill the window. */
-        html,
-        body {
-            height: 90%;
-            width: 70%;
-            margin: auto;
-            padding: 1;
-        }
-    </style>
+    <script type="text/javascript" src="../static/app.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwPpl0K88EF2aziV-1flLjO-dePphxds" async
         defer></script>
