@@ -6,10 +6,12 @@ $('#form').submit(function (e) {
         result = JSON.parse(result)
         if (result === "No results"){
             $("#text").html("Est-ce que tu peux répéter, mon poussin? Je n'ai pas bien compris. Tu sais, je me fait vieux, je n'entend plus très bien. D'ailleurs, ça me rapelle une histoire que j'ai vécu en 1935. A cet époq- Zzzz...")
+            $("#map").empty();
+            $("#blockquote").empty();
         } else{
             console.log(result)
-            $("#text1").html("Bien sur mon poussin, là voici! Mais laisse-moi d'abord te raconter le lieu de cette histoire!");
-            $("#text2").html("C'était en 1957, ...");
+            $("#text").html("Bien sur mon poussin, là voici! Mais laisse-moi d'abord te raconter le lieu de cette histoire!<br><br>");
+            $("#text").append(result.quote);
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: result.latitude, lng: result.longitude },
                 zoom: 15
@@ -23,7 +25,7 @@ $('#form').submit(function (e) {
                 let url = result.page.query.pages[page].fullurl;
                 console.log(url);
                 $("#blockquote").html(extract);
-                $("#blockquote").append('<footer class="blockquote-footer">Wikipedia. Pour en savoir plus, cliquer sur ce <a href="' + url + '">lien</a></footer>');
+                $("#blockquote").append('<footer class="blockquote-footer">Wikipedia. Pour en savoir plus, cliquer sur ce <a href="' + url + '" target="_blank">lien</a></footer>');
                 break
             }
 
