@@ -1,4 +1,4 @@
-import program.index as script
+import index as script 
 import pytest
 
 def test_parse():
