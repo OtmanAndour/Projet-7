@@ -2,7 +2,7 @@ $('#form').submit(function (e) {
     e.preventDefault()
     var mavariable = $('#input').val()
     console.log(mavariable)
-    $.get('test?name=' + mavariable, function (result) {
+    $.get('search?name=' + mavariable, function (result) {
         result = JSON.parse(result)
         if (result === "No results"){
             $("#text").html("Est-ce que tu peux répéter, mon poussin? Je n'ai pas bien compris. Tu sais, je me fait vieux, je n'entend plus très bien. D'ailleurs, ça me rapelle une histoire que j'ai vécu en 1935. A cet époq- Zzzz...")
