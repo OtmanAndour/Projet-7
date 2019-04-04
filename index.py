@@ -5,7 +5,7 @@
 
 
 from flask import Flask,request
-from constants import *
+from config import *
 import requests
 import json
 import random
@@ -52,12 +52,11 @@ def helloIndex():
                 return f.read()
         
 """ Route for the search answer webpage """ 
-@app.route('/search') 
-def search():
+@app.route('/result')
+def result():
         user_research = request.args.get('name') 
         user_research_parsed = parse(user_research)
         search_json = google_maps_api_search(user_research_parsed)
-        print(search_json)
         if search_json["status"] == 'ZERO_RESULTS':
                 return json.dumps("No results")
         else:

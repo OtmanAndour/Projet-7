@@ -1,4 +1,6 @@
-import index as script 
+import sys
+sys.path.append(".")
+import index as script
 import urllib.request
 from io import BytesIO
 import json
@@ -28,7 +30,7 @@ def test_http_return(tmpdir, monkeypatch):
     p = tmpdir.mkdir("program").join("search.json")
 
     # run script
-    script.search(["--dest", str(p)])
+    script.search()
 
     local_res = json.load(open(p))
     assert local_res == script.google_maps_api_search("Tour Eiffel")
