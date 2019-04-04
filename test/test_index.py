@@ -28,7 +28,7 @@ def test_http_return(tmpdir, monkeypatch):
     p = tmpdir.mkdir("program").join("search.json")
 
     # run script
-    script.testIndex(["--dest", str(p)])
+    script.search(["--dest", str(p)])
 
     local_res = json.load(open(p))
     assert local_res == script.google_maps_api_search("Tour Eiffel")

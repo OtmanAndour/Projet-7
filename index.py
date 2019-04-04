@@ -45,35 +45,30 @@ def wikipedia_api_search(search,params):
     return wiki_json
 
 
-def main():
-        """ Main route for the html webpage """  
-        @app.route('/')
-        def helloIndex():
-                with open('templates/index.html', 'r') as f:
-                        return f.read()
-                
+""" Main route for the html webpage """  
+@app.route('/')
+def helloIndex():
+        with open('templates/index.html', 'r') as f:
+                return f.read()
+        
+""" Route for the search answer webpage """ 
+@app.route('/search') 
+def search():
+        user_research = request.args.get('name') 
+        user_research_parsed = parse(user_research)
+        search_json = google_maps_api_search(user_research_parsed)
+        print(search_json)
+        if search_json["status"] == 'ZERO_RESULTS':
+                return json.dumps("No results")
+        else:
+                latitude = get_latitude(search_json)
+                longitude = get_longitutde(search_json)
+                wiki_json_pageid = wikipedia_api_search({'srsearch' : user_research_parsed}, wiki_params_pageid)
+                pageid = wiki_json_pageid['query']['search'][0]['pageid']
+                wiki_json_infos = wikipedia_api_search({'pageids' : pageid}, wiki_params_infos)
+                quote = abe_quotes[random.randint(0,len(abe_quotes)-1)]
+                response = {'latitude' : latitude, 'longitude' : longitude, 'page' : wiki_json_infos, 'quote' :quote}
+                return json.dumps(response)
 
-        """ Route for the search answer webpage """ 
-        @app.route('/search') 
-        def searchIndex():
-                user_research = request.args.get('name') 
-                user_research_parsed = parse(user_research)
-                search_json = google_maps_api_search(user_research_parsed)
-                print(search_json)
-                if search_json["status"] == 'ZERO_RESULTS':
-                        return json.dumps("No results")
-                else:
-                        latitude = get_latitude(search_json)
-                        longitude = get_longitutde(search_json)
-                        wiki_json_pageid = wikipedia_api_search({'srsearch' : user_research_parsed}, wiki_params_pageid)
-                        pageid = wiki_json_pageid['query']['search'][0]['pageid']
-                        wiki_json_infos = wikipedia_api_search({'pageids' : pageid}, wiki_params_infos)
-                        quote = abe_quotes[random.randint(0,len(abe_quotes)-1)]
-                        response = {'latitude' : latitude, 'longitude' : longitude, 'page' : wiki_json_infos, 'quote' :quote}
-                        return json.dumps(response)
-
-
-if __name__ == "__main__":
-    main()
 
 app.run(port= 80)
