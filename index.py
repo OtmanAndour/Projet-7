@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 # coding: utf-8
-
 """Main file for the website."""
 
 
@@ -9,6 +8,7 @@ from config import *
 import requests
 import json
 import random
+
 
 app = Flask(__name__)
 
