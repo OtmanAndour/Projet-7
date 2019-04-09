@@ -1,3 +1,5 @@
+import sys
+sys.path.append(".")
 import index as script
 import requests
 import json
@@ -9,7 +11,7 @@ def test_parse():
 
 def test_google_maps_api_search(monkeypatch):
     """ Testing for the location Tour Eiffel"""
-    with codecs.open("test_google_maps_api.json","r", "utf-8-sig") as f:
+    with codecs.open("tests/test_google_maps_api.json","r", "utf-8-sig") as f:
         results = json.loads(f.read())
 
     class MockRequestsGet:
@@ -55,7 +57,7 @@ def test_get_longitude():
 
 def test_wikipedia_api_search(monkeypatch):
     """ Testing for the location Tour Eiffel"""
-    with codecs.open("test_wiki_api.json","r", "utf-8-sig") as f:
+    with codecs.open("tests/test_wiki_api.json","r", "utf-8-sig") as f:
         results = json.loads(f.read())
 
     class MockRequestsGet:
