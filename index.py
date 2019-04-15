@@ -69,5 +69,5 @@ def result():
                 response = {'latitude' : latitude, 'longitude' : longitude, 'page' : wiki_json_infos, 'quote' :quote}
                 return json.dumps(response)
 
-
-app.run(port= 80)
+if __name__ == "__main__":
+    app.run(port= 80)
