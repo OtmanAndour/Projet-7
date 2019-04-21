@@ -8,8 +8,9 @@ from config import *
 import requests
 import json
 import random
+import os
 
-
+api_key = os.getenv("API_KEY")
 app = Flask(__name__)
 
 def parse(research):
