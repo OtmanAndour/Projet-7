@@ -3,14 +3,21 @@ sys.path.append(".")
 import index as script
 import requests
 import json
-from config import wiki_params_infos
+from config import *
 import codecs
+import os
+api_key = os.getenv("API_KEY")
 
 def test_parse():
     assert script.parse("Dis moi où se trouve la Tour Eiffel") == "Tour Eiffel"
 
 def test_google_maps_api_search(monkeypatch):
     """ Testing for the location Tour Eiffel"""
+    search_params = {'key' : api_key, 'input' : "Tour Eiffel", 'inputtype' : 'textquery', 'fields' : 'geometry'}
+    search_req = requests.get(search_url, params=search_params)
+    with codecs.open("tests/test_google_maps_api.json","w", "utf-8-sig") as f:
+        f.write(search_req.text)
+        f.close()
     with codecs.open("tests/test_google_maps_api.json","r", "utf-8-sig") as f:
         results = json.loads(f.read())
 
@@ -57,6 +64,11 @@ def test_get_longitude():
 
 def test_wikipedia_api_search(monkeypatch):
     """ Testing for the location Tour Eiffel"""
+    wiki_params_infos.update({'pageids' : 1359783})
+    wiki_req = requests.Session().get(wiki_url, params=wiki_params_infos)
+    with codecs.open("tests/test_wiki_api.json","w", "utf-8-sig") as f:
+        f.write(wiki_req.text)
+        f.close()
     with codecs.open("tests/test_wiki_api.json","r", "utf-8-sig") as f:
         results = json.loads(f.read())
 
