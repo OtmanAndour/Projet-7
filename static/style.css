@@ -1,3 +1,7 @@
 #header{
-    background: url("images/bot.png") no-repeat;
+    background: url("images/bot.png") no-repeat 10vw;
+}
+
+#map{
+    height: 500px;
 }
