@@ -31,7 +31,6 @@ def google_maps_api_search(search):
 
 def get_latitude(result):
         """ Retrieves location latitude"""
-        print(result)
         return result["candidates"][0]["geometry"]["location"]["lat"]
 
 def get_longitutde(result):
