@@ -11,7 +11,6 @@ Install the requirements
 Launch the index.py
 Go to the given flask link
 
-
 Web app
 
 You can also acces the web app through this link : https://project7-grandpy-bot.herokuapp.com/
