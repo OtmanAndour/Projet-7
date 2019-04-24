@@ -5,11 +5,11 @@ An old granddad-robot giving you information about places, and occasionnaly fall
 
 Local launching
 
-Clone the repo
-Create a pipenv virtual environment
-Install the requirements
-Launch the index.py
-Go to the given flask link
+Clone the repo,
+create a pipenv virtual environment,
+install the requirements,
+launch the index.py,
+go to the given flask link.
 
 Web app
 
